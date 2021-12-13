@@ -3,7 +3,7 @@
 This keyboard remap is based on [Key Mapper](https://github.com/sezanzeb/key-mapper) functionality, which is currently in early development. Only a few Nautilus keybindings are implemented at the moment for testing purposes. For a complete and stable solution please refer to the original [Gnome → macOS Keyboard Remap](https://github.com/petrstepanov/gnome-macos-remap) that works with Xorg only.
 
 <figure>
-  <img src="https://github.com/petrstepanov/gnome-macos-remap-wayland/blob/master/resources/gnome-macos-remap-wayland.png?raw=true" alt="Gnome macOS Remap Icon" />
+  <img src="https://raw.githubusercontent.com/petrstepanov/gnome-macos-remap-wayland/main/resources/gnome-macos-remap-wayland.png?raw=true" alt="Gnome macOS Remap Icon" />
 </figure>
 
 ## How does it work?
