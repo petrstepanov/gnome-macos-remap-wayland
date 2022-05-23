@@ -1,53 +1,26 @@
 #!/bin/bash
 
-# Force move backup mapping file to original
-if [ -f /usr/share/X11/xkb/symbols/pc.bak ]; then
-  echo "Restoring Super and Control behaviour ..."
-  sudo mv -f /usr/share/X11/xkb/symbols/pc.bak /usr/share/X11/xkb/symbols/pc
-fi
+# Stop and disable the systemd service
+sudo systemctl stop gnome-macos-remap@$USER
+sudo systemctl disable gnome-macos-remap@$USER
 
-# TODO: Uninstall Key Mapper settings
-echo "Uninstalling Key Mapper settings..."
+# Remove xremap executable
+sudo rm /usr/local/bin/xremap
 
-# Revert standard GNOME keybindings
-echo "Reverting default GNOME keybindings..."
-gsettings reset org.gnome.desktop.wm.keybindings activate-window-menu
-gsettings reset org.gnome.desktop.wm.keybindings panel-main-menu
-gsettings reset org.gnome.desktop.wm.keybindings show-desktop
-gsettings reset org.gnome.desktop.wm.keybindings switch-applications
-gsettings reset org.gnome.desktop.wm.keybindings switch-applications-backward
-gsettings reset org.gnome.desktop.wm.keybindings switch-group
-gsettings reset org.gnome.desktop.wm.keybindings switch-group-backward
-gsettings reset org.gnome.desktop.wm.keybindings switch-input-source
-gsettings reset org.gnome.desktop.wm.keybindings switch-input-source-backward
-gsettings reset org.gnome.desktop.wm.keybindings switch-to-workspace-down
-gsettings reset org.gnome.desktop.wm.keybindings switch-to-workspace-up
-gsettings reset org.gnome.desktop.wm.keybindings switch-to-workspace-left
-gsettings reset org.gnome.desktop.wm.keybindings switch-to-workspace-right
-gsettings reset org.gnome.desktop.wm.keybindings minimize
+# Remove tweak in /usr/share/dbus-1/session.conf - delete line containing "<!-- xremap -->"
+sudo sed -i "/xremap/d" /usr/share/dbus-1/session.conf
 
-gsettings reset org.gnome.shell.keybindings toggle-overview
-gsettings reset org.gnome.shell.keybindings toggle-application-view
-gsettings reset org.gnome.shell.keybindings toggle-message-tray
+# TODO: Remove GNOME xremap extension
 
-gsettings reset org.gnome.mutter.keybindings toggle-tiled-left
-gsettings reset org.gnome.mutter.keybindings toggle-tiled-right
+# Remove xremap config file
+rm -rf ~/.config/gnome-macos-remap/
 
-gsettings reset org.gnome.mutter.wayland.keybindings restore-shortcuts
+# Restart is required in order for the changes in the `/usr/share/dbus-1/session.conf` to take place
+# Therefore cannot launch service right away 
+# sudo systemctl start gnome-macos-remap@$USER
 
-gsettings reset org.gnome.settings-daemon.plugins.media-keys screenshot
-gsettings reset org.gnome.settings-daemon.plugins.media-keys area-screenshot
-gsettings reset org.gnome.settings-daemon.plugins.media-keys window-screenshot
-gsettings reset org.gnome.settings-daemon.plugins.media-keys screensaver
-
-gsettings reset org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-tab
-gsettings reset org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-window
-gsettings reset org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-tab
-gsettings reset org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-window
-gsettings reset org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find
-
-# Revert Left Super Overlay Shortcut
+# Tweak gsettings
+# Disable overview key ⌘ 
 gsettings reset org.gnome.mutter overlay-key
-
-echo ""
-echo "Uninstall complete. Please restart your computer."
+# Set switch applications to ⌘+TAB
+gsettings reset org.gnome.desktop.wm.keybindings switch-applications

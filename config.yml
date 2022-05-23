@@ -1,0 +1,17 @@
+# `modmap` section
+# For key-to-key remapping (no combinations). Remapping a key to a modifier key (e.g. CapsLock to Control_L) is supported only in `modmap` section
+modmap:
+  - name: Make ⌘ act as Ctrl (except for Terminal app)
+    application:
+      not: gnome-terminal
+    remap:
+      KEY_LEFTMETA: KEY_LEFTCTRL
+      KEY_RIGHTMETA: KEY_RIGHTCTRL
+      
+# `keymap` section
+# For remapping a sequence of key combinations to another sequence of key combinations
+keymap:
+  - name: Make ⌘← and ⌘→ work as Home and End (except for Terminal app - just like on macOS)
+    remap:
+      Ctrl-Left: Home
+      Ctrl-Right: End
