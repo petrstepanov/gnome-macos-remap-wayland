@@ -1,4 +1,4 @@
-# Gnome → macOS Keyboard Remap
+# Gnome → macOS Keyboard Remap for Wayland (in progress...)
 
 This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality. Currently repository is in the early development. Only a few keybindings are implemented at the moment for testing purposes. For a complete and stable solution please refer to the original [Gnome → macOS Keyboard Remap](https://github.com/petrstepanov/gnome-macos-remap) that works with Xorg only.
 
@@ -39,6 +39,8 @@ sh uninstall.sh
 2. Restart your computer.
 
 ## Logbook
-May 23, 2022 • Moving to xremap functionality instead.
-Dec 13, 2021 • First commit, testing out the Key Mapper.
+
+`May 23, 2021` • Moving to [xRemap](https://github.com/k0kubun/xremap) functionality instead.
+
+`Dec 13, 2021` • First commit, testing out the [Key Mapper](https://github.com/sezanzeb/key-mapper).
 
