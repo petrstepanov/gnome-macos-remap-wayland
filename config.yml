@@ -5,13 +5,14 @@ modmap:
     application:
       not: gnome-terminal
     remap:
-      KEY_LEFTMETA: KEY_LEFTCTRL
-      KEY_RIGHTMETA: KEY_RIGHTCTRL
-      
+      LeftMeta: LeftCtrl
+      RightMeta: RightCtrl
 # `keymap` section
 # For remapping a sequence of key combinations to another sequence of key combinations
 keymap:
-  - name: Make ⌘← and ⌘→ work as Home and End (except for Terminal app - just like on macOS)
+  - name: Make ⌘← and ⌘→ work as Home and End (with Shift for selection)
     remap:
       Ctrl-Left: Home
       Ctrl-Right: End
+      Shift-Ctrl-Left: Shift-Home
+      Shift-Ctrl-Right: Shift-End

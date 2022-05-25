@@ -10,7 +10,7 @@ This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) 
 Script builds latest version of the `xremap` for your architecture. Configuration file `config.yaml` contains majority of the remapping instructions. On top of that the default GNOME shell keybindings are modified. A systemd service is created and enabled for a particular user. Therefore after the install other users on the system will not be affected by the remap. 
 
 ## Prerequisities
-* Install Git `sudo <your-package-manager> install git`.
+* Install Git and GNOME extensions `sudo <your-package-manager> install git gnome-shell-extensions`.
 * Install Rust `curl https://sh.rustup.rs -sSf | sh`. 
 * Restart GNOME Shell `killall -3 gnome-shell`.
 
