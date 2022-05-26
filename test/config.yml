@@ -1,0 +1,4 @@
+keymap:
+  - name: Type lowercase `b` on Shift-a keypress
+    remap:
+      Shift-a: b
