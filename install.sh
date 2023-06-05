@@ -107,17 +107,21 @@ fi
 
 # Tweak gsettings
 echo "INFO: Tweaking GNOME and Mutter keybindings..."
+
 # Disable overview key ⌘ 
 gsettings set org.gnome.mutter overlay-key ''
 
-# Set switch applications to ⌘+TAB
-# gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Primary>Tab']"
+# Set switch applications to ⌘+TAB, switch application windows ⌘+`
+gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Control>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<Shift><Control>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Control>grave']"
+gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Control>grave']"
 
-# Show all applications (with mac's F3 key and imitate spotlight)
-gsettings set org.gnome.shell.keybindings toggle-application-view "['<Primary>space', 'LaunchB']"
-
-# Toggle overview (with mac's F4 key) 
+# Toggle overview (with mac's F3 key) 
 gsettings set org.gnome.shell.keybindings toggle-overview "['LaunchA']"
+
+# Show all applications (with mac's F4 key and imitate spotlight)
+gsettings set org.gnome.shell.keybindings toggle-application-view "['<Primary>space', 'LaunchB']"
 
 # Setting relocatable schema for Terminal
 #gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ copy '<Primary>c'

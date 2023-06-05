@@ -18,3 +18,12 @@ keymap:
       Ctrl-Right: End
       Shift-Ctrl-Left: Shift-Home
       Shift-Ctrl-Right: Shift-End
+  - name: Nautilus directory navigation and other
+    application: 
+      only: org.gnome.Nautilus.org.gnome.Nautilus
+    remap:
+      Ctrl-Up: Alt-Up
+      Ctrl-Down: Alt-Down
+      Ctrl-Backspace: Delete
+      Shift-Ctrl-Dot: Ctrl-H
+      Shift-Ctrl-G: Ctrl-L
