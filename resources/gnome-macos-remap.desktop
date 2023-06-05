@@ -5,4 +5,6 @@ Name=GNOME → macOS Remap
 Comment=Brings macOS keybindings to the GNOME shell 
 Icon=gnome-macos-remap
 Exec=gnome-macos-remap.sh
-Categories=Utility
+Terminal=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=5
