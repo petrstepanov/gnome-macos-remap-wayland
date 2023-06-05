@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=GNOME → macOS Remap
+Comment=Brings macOS keybindings to the GNOME shell 
+Icon=gnome-macos-remap
+Exec=gnome-macos-remap.sh
+Categories=Utility

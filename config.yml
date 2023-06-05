@@ -3,9 +3,11 @@
 modmap:
   - name: Make ⌘ act as Ctrl (except for Terminal app)
     application:
-      not: gnome-terminal
+      not: gnome-terminal-server.Gnome-terminal
     remap:
+      LeftCtrl: LeftMeta
       LeftMeta: LeftCtrl
+      RightCtrl: RightMeta
       RightMeta: RightCtrl
 # `keymap` section
 # For remapping a sequence of key combinations to another sequence of key combinations
