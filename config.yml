@@ -18,6 +18,16 @@ keymap:
       Ctrl-Right: End
       Shift-Ctrl-Left: Shift-Home
       Shift-Ctrl-Right: Shift-End
+  - name: Delete word
+    remap:
+      Alt-Backspace: Ctrl-Backspace
+  - name: Delete complete line # TODO - check on macOS. Not sure how to delete before and after cursor.
+    application:
+      not: gnome-terminal-server.Gnome-terminal
+    remap:
+      Ctrl-K: Ctrl-D
+#  TODO: Next word
+#  TODO: Previous word
   - name: Nautilus directory navigation and other
     application: 
       only: org.gnome.Nautilus.org.gnome.Nautilus
@@ -33,3 +43,9 @@ keymap:
     remap:
       Super-C: Shift-Super-C
       Super-V: Shift-Super-V
+  - name: Switch applications with Terminal active window
+    application: 
+      only: gnome-terminal-server.Gnome-terminal
+    remap:
+      Super-Tab: Ctrl-Tab
+      Super-KEY_GRAVE: Ctrl-KEY_GRAVE

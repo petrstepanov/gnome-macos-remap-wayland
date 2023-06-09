@@ -108,8 +108,15 @@ fi
 # Tweak gsettings
 echo "INFO: Tweaking GNOME and Mutter keybindings..."
 
-# Disable overview key ⌘ 
+# Disable overview key ⌘ - interferes with ⌘ + ... combinations
 gsettings set org.gnome.mutter overlay-key ''
+
+# Paste in terminal (if set via Ctrl+V, not Shift+Ctrl+V) interferes with default GNOME show notification panel shortcut
+gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
+
+# Switch workspaces conflicts with GNOM window left/right tiling
+gsettings set org.gnome.mutter.keybindings toggle-tiled-left "[]"
+gsettings set org.gnome.mutter.keybindings toggle-tiled-right "[]"
 
 # Set switch applications to ⌘+TAB, switch application windows ⌘+`
 gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Control>Tab']"
@@ -132,11 +139,12 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-window '<Super>q'
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Super>f'
 
+# Todo: screenshots
+gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
+gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"
+
 # Restart is required in order for the changes in the `/usr/share/dbus-1/session.conf` to take place
 # Therefore cannot launch service right away
-
-
-
-# Todo: screenshots
 
 echo "INFO: Done. Please restart your computer."
