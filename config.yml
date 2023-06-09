@@ -27,3 +27,9 @@ keymap:
       Ctrl-Backspace: Delete
       Shift-Ctrl-Dot: Ctrl-H
       Shift-Ctrl-G: Ctrl-L
+  - name: Terminal copy and paste
+    application: 
+      only: gnome-terminal-server.Gnome-terminal
+    remap:
+      Super-C: Shift-Super-C
+      Super-V: Shift-Super-V
