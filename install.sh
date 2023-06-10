@@ -111,18 +111,29 @@ echo "INFO: Tweaking GNOME and Mutter keybindings..."
 # Disable overview key ⌘ - interferes with ⌘ + ... combinations
 gsettings set org.gnome.mutter overlay-key ''
 
-# Paste in terminal (if set via Ctrl+V, not Shift+Ctrl+V) interferes with default GNOME show notification panel shortcut
-gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
-
-# Switch workspaces conflicts with GNOM window left/right tiling
-gsettings set org.gnome.mutter.keybindings toggle-tiled-left "[]"
-gsettings set org.gnome.mutter.keybindings toggle-tiled-right "[]"
+# Show the desktop (minimize all windows)
+gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Control>d']"
 
 # Set switch applications to ⌘+TAB, switch application windows ⌘+`
 gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Control>Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<Shift><Control>Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Control>grave']"
 gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Control>grave']"
+
+# ⌘ - Space hotkey for spotlight functionality conflicts with default Gnome switch-input-source shortcut  
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]"
+
+# Switch workspaces conflicts with default GNOME window left/right tiling
+gsettings set org.gnome.mutter.keybindings toggle-tiled-left "[]"
+gsettings set org.gnome.mutter.keybindings toggle-tiled-right "[]"
+
+# Switch workspaces
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Left']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Right']"
+
+# Paste in terminal (if set via Ctrl+V, not Shift+Ctrl+V) interferes with default GNOME show notification panel shortcut
+gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
 
 # Toggle overview (with mac's F3 key) 
 gsettings set org.gnome.shell.keybindings toggle-overview "['LaunchA']"
@@ -139,10 +150,13 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-window '<Super>q'
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Super>f'
 
-# Todo: screenshots
+# Screenshots
 gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
 gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"
+
+# Disable screensaver to avoid potential issues
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 
 # Restart is required in order for the changes in the `/usr/share/dbus-1/session.conf` to take place
 # Therefore cannot launch service right away
