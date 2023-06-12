@@ -70,6 +70,17 @@ sudo cp $BASE_DIR/config.yml /usr/local/share/gnome-macos-remap/
 #systemctl --user daemon-reload
 #systemctl --user enable gnome-macos-remap
 
+# Install python scripts for Terminal
+# echo "INFO: Copying Python scripts..."
+# pip install pynput
+# cp $BASE_DIR/python/*.py ~/.local/bin
+# chmod +x ~/.local/bin/*.py
+
+# Install bash scripts for Terminal
+echo "INFO: Copying bash scripts..."
+cp $BASE_DIR/bin/terminal*.sh ~/.local/bin
+chmod +x ~/.local/bin/terminal*.sh
+
 echo "INFO: Creating autostart entry..."
 # Install application icon
 mkdir -p ~/.local/share/icons/hicolor/scalable/apps/
@@ -111,7 +122,11 @@ echo "INFO: Tweaking GNOME and Mutter keybindings..."
 # Disable overview key ⌘ - interferes with ⌘ + ... combinations
 gsettings set org.gnome.mutter overlay-key ''
 
-# Show the desktop (minimize all windows)
+# Minimize one window and all windows - conflicts with show hidden files in Nautilus
+# gsettings set org.gnome.desktop.wm.keybindings minimize "['<Control>h']"
+gsettings set org.gnome.desktop.wm.keybindings minimize "[]"
+
+# Minimize all windows
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Control>d']"
 
 # Set switch applications to ⌘+TAB, switch application windows ⌘+`
@@ -144,13 +159,13 @@ gsettings set org.gnome.shell.keybindings toggle-application-view "['<Primary>sp
 # Setting relocatable schema for Terminal
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ copy '<Shift><Super>c'
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ paste '<Shift><Super>v'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-tab '<Super>t'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-window '<Super>n'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-tab '<Super>w'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-window '<Super>q'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Super>f'
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-tab '<Shift><Super>t'
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-window '<Shift><Super>n'
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-tab '<Shift><Super>w'
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-window '<Shift><Super>q'
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Shift><Super>f'
 
-# Screenshots
+# Screenshots			
 gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
 gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"

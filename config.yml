@@ -2,8 +2,6 @@
 # For key-to-key remapping (no combinations). Remapping a key to a modifier key (e.g. CapsLock to Control_L) is supported only in `modmap` section
 modmap:
   - name: Make ⌘ act as Ctrl (except for Terminal app)
-    application:
-      not: gnome-terminal-server.Gnome-terminal
     remap:
       LeftCtrl: LeftMeta
       LeftMeta: LeftCtrl
@@ -37,15 +35,39 @@ keymap:
       Ctrl-Backspace: Delete
       Shift-Ctrl-Dot: Ctrl-H
       Shift-Ctrl-G: Ctrl-L
-  - name: Terminal copy and paste
+  - name: Terminal copy and paste and window management
     application: 
       only: gnome-terminal-server.Gnome-terminal
     remap:
-      Super-C: Shift-Super-C
-      Super-V: Shift-Super-V
-  - name: Switch applications with Terminal active window
+      Ctrl-C: Shift-Super-C
+      Ctrl-V: Shift-Super-V
+      Ctrl-T: Shift-Super-T
+      Ctrl-N: Shift-Super-N
+      Ctrl-W: Shift-Super-W
+      Ctrl-Q: Shift-Super-Q
+  - name: Terminal interrupt
     application: 
       only: gnome-terminal-server.Gnome-terminal
     remap:
-      Super-Tab: Ctrl-Tab
-      Super-KEY_GRAVE: Ctrl-KEY_GRAVE
+      Super-C: Ctrl-C
+  - name: Terminal special combinations for keycombiner.com/collections/nano/
+    application: 
+      only: gnome-terminal-server.Gnome-terminal
+    remap:
+#      Interferes with GNOME close window - not sure how to work around
+      Super-Q: Ctrl-Q    
+      Super-W: Ctrl-W    
+      Super-E: Ctrl-E
+      Super-E: Ctrl-R      
+      Super-T: Ctrl-T
+      Super-Y: Ctrl-Y
+      Super-U: Ctrl-U
+      Super-O: Ctrl-O
+      Super-P: Ctrl-P
+      Super-A: Ctrl-A
+      Super-KEY_SLASH: Ctrl-KEY_SLASH
+#      Super-T: 
+#        launch: ["sh", "/home/petrstepanov/.local/bin/terminal-ctrl-t.sh"]
+#      Super-W: 
+#        launch: ["sh", "/home/petrstepanov/.local/bin/terminal-ctrl-w.sh"]
+      Super-X: Ctrl-X
