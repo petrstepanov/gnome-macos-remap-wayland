@@ -45,6 +45,7 @@ keymap:
       Ctrl-N: Shift-Super-N
       Ctrl-W: Shift-Super-W
       Ctrl-Q: Shift-Super-Q
+      Ctrl-F: Shift-Super-F      
   - name: Terminal interrupt
     application: 
       only: gnome-terminal-server.Gnome-terminal
@@ -64,10 +65,26 @@ keymap:
       Super-U: Ctrl-U
       Super-O: Ctrl-O
       Super-P: Ctrl-P
+      Super-KEY_RIGHTBRACE: Ctrl-KEY_RIGHTBRACE
       Super-A: Ctrl-A
-      Super-KEY_SLASH: Ctrl-KEY_SLASH
-#      Super-T: 
-#        launch: ["sh", "/home/petrstepanov/.local/bin/terminal-ctrl-t.sh"]
-#      Super-W: 
-#        launch: ["sh", "/home/petrstepanov/.local/bin/terminal-ctrl-w.sh"]
+      Super-S: Ctrl-S
+# How to implement a terminal key combination that conflicts with some GNOME keybinding?
+# A. Unset the default via gsettings in install.sh and do not use this GNOME keybinding
+# - or -
+# B. Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back. 
+      Super-D: 
+        launch: ["sh", "/home/petrstepanov/.local/bin/terminal-ctrl-d.sh"]
+      Super-F: Ctrl-F
+      Super-G: Ctrl-G      
+      Super-H: Ctrl-H      
+      Super-J: Ctrl-J
+      Super-K: Ctrl-K
+      Super-L: Ctrl-L      
+      Super-Z: Ctrl-Z
       Super-X: Ctrl-X
+#     Ctrl-C declared in previous sections
+#     Super-C: Ctrl-C
+      Super-V: Ctrl-V
+      Super-B: Ctrl-B
+      Super-N: Ctrl-N
+      Super-KEY_SLASH: Ctrl-KEY_SLASH
