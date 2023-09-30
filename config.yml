@@ -1,3 +1,5 @@
+keypress_delay_ms: 10
+
 # `modmap` section
 # For key-to-key remapping (no combinations). Remapping a key to a modifier key (e.g. CapsLock to Control_L) is supported only in `modmap` section
 modmap:
@@ -12,6 +14,9 @@ modmap:
 # `keymap` section
 # For remapping a sequence of key combinations to another sequence of key combinations
 keymap:
+#  - name: Test
+#    remap:
+#      Shift-A: b
   - name: Make ⌘← and ⌘→ work as Home and End (with Shift for selection)
     remap:
       Ctrl-Left: Home
