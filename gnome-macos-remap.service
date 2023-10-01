@@ -3,9 +3,9 @@ Description=GNOME -> macOS Remap
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/xremap "/usr/local/share/gnome-macos-remap/config.yml"
-# ExecStart=/usr/local/bin/xremap "YOUR-HOME-HOLDER/.config/gnome-macos-remap/config.yml"
 Restart=on-failure
+RestartSec=30
+ExecStart=xremap %h/.config/gnome-macos-remap/config.yml
 
 [Install]
-WantedBy=default.target	
+WantedBy=default.target

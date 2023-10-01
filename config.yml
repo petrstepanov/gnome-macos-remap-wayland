@@ -5,7 +5,7 @@ keypress_delay_ms: 10
 modmap:
   - name: Make ⌘ act as Ctrl
 #    application:
-#      not: gnome-terminal-server.Gnome-terminal
+#      not: gnome-terminal-server
     remap:
       LeftCtrl: LeftMeta
       LeftMeta: LeftCtrl
@@ -28,23 +28,23 @@ keymap:
       Alt-Backspace: Ctrl-Backspace
   - name: Delete complete line # TODO - check on macOS. Not sure how to delete before and after cursor.
     application:
-      not: gnome-terminal-server.Gnome-terminal
+      not: gnome-terminal-server
     remap:
       Ctrl-K: Ctrl-D
 #  TODO: Next word
 #  TODO: Previous word
-  - name: Nautilus directory navigation and other
-    application: 
-      only: org.gnome.Nautilus.org.gnome.Nautilus
+  - name: Norg.gnome.Nautilus directory navigation and other
+    application:
+      only: org.gnome.Nautilus
     remap:
       Ctrl-Up: Alt-Up
       Ctrl-Down: Alt-Down
       Ctrl-Backspace: Delete
       Shift-Ctrl-Dot: Ctrl-H
       Shift-Ctrl-G: Ctrl-L
-  - name: Terminal copy and paste and window management
-    application: 
-      only: gnome-terminal-server.Gnome-terminal
+  - name: Tgnome-terminal-server copy and paste and window management
+    application:
+      only: gnome-terminal-server
     remap:
       Ctrl-C: Shift-Super-C
       Ctrl-V: Shift-Super-V
@@ -52,21 +52,21 @@ keymap:
       Ctrl-N: Shift-Super-N
       Ctrl-W: Shift-Super-W
       Ctrl-Q: Shift-Super-Q
-      Ctrl-F: Shift-Super-F      
-  - name: Terminal interrupt
-    application: 
-      only: gnome-terminal-server.Gnome-terminal
+      Ctrl-F: Shift-Super-F
+  - name: Tgnome-terminal-server interrupt
+    application:
+      only: gnome-terminal-server
     remap:
       Super-C: Ctrl-C
-  - name: Terminal special combinations for nano editor (keycombiner.com/collections/nano/)
-    application: 
-      only: gnome-terminal-server.Gnome-terminal
+  - name: Tgnome-terminal-server special combinations for nano editor (keycombiner.com/collections/nano/)
+    application:
+      only: gnome-terminal-server
     remap:
 #      Interferes with GNOME close window - not sure how to work around
-      Super-Q: Ctrl-Q    
-      Super-W: Ctrl-W    
+      Super-Q: Ctrl-Q
+      Super-W: Ctrl-W
       Super-E: Ctrl-E
-      Super-E: Ctrl-R      
+      Super-E: Ctrl-R
       Super-T: Ctrl-T
       Super-Y: Ctrl-Y
       Super-U: Ctrl-U
@@ -75,18 +75,18 @@ keymap:
       Super-KEY_RIGHTBRACE: Ctrl-KEY_RIGHTBRACE
       Super-A: Ctrl-A
       Super-S: Ctrl-S
-# How to implement a terminal key combination that conflicts with some GNOME keybinding?
+# How to implement a tgnome-terminal-server key combination that conflicts with some GNOME keybinding?
 # A. Unset the default via gsettings in install.sh and do not use this GNOME keybinding
 # - or -
-# B. Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back. 
-      Super-D: 
-        launch: ["sh", "/home/petrstepanov/.local/bin/terminal-ctrl-d.sh"]
+# B. Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back.
+      Super-D:
+        launch: ["sh", "/home/petrstepanov/.local/bin/tgnome-terminal-server-ctrl-d.sh"]
       Super-F: Ctrl-F
-      Super-G: Ctrl-G      
-      Super-H: Ctrl-H      
+      Super-G: Ctrl-G
+      Super-H: Ctrl-H
       Super-J: Ctrl-J
       Super-K: Ctrl-K
-      Super-L: Ctrl-L      
+      Super-L: Ctrl-L
       Super-Z: Ctrl-Z
       Super-X: Ctrl-X
 #     Ctrl-C declared in previous sections

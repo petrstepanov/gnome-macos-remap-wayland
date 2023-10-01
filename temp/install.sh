@@ -44,31 +44,70 @@ if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
   xhost +SI:localuser:root
 fi
 
+# Sudo requires a tweak in /usr/share/dbus-1/session.conf (according to the xremap readme)
+echo "INFO: Tweaking /usr/share/dbus-1/session.conf..."
+# If installed before - delete line containing "<!-- xremap -->"
+sudo sed -i "/xremap/d" /usr/share/dbus-1/session.conf
+# Add line: <allow user="root"> <!-- xremap -->
+sudo sed -i "s;<policy context=\"default\">;<policy context=\"default\">\n    <allow user=\"root\"/> <!-- xremap -->;g" /usr/share/dbus-1/session.conf
+
 # Copy xremap config file with macOS bindings
-CONFIG_DIR=~/.config/gnome-macos-remap/
-echo "INFO: Copying the xremap config file to ${CONFIG_DIR}"
-mkdir -p $CONFIG_DIR
-cp $BASE_DIR/config.yml $CONFIG_DIR
+# https://stackoverflow.com/questions/1024114/location-of-ini-config-files-in-linux-unix
+echo "INFO: Copying the xremap config file..."
+sudo mkdir -p /usr/local/share/gnome-macos-remap/
+sudo cp $BASE_DIR/config.yml /usr/local/share/gnome-macos-remap/
 
 # Copy systemd service file
-SERVICE_DIR=~/.local/share/systemd/user/
-echo "INFO: Installing systemd service to ${SERVICE_DIR}"
-mkdir -p $SERVICE_DIR
-cp $BASE_DIR/gnome-macos-remap.service $SERVICE_DIR
+#echo "INFO: Installing systemd service..."
+#sudo cp $BASE_DIR/gnome-macos-remap.service /etc/systemd/system/
 
-# Run xremap without sudo
-sudo gpasswd -a ${USER} input
-echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/input.rules
+# Instantiate the service (for sudo) - may work for Wayland because this runs before login screen when X11 is inactive??
+# Try later
+#sudo systemctl daemon-reload
+#sudo systemctl enable gnome-macos-remap
 
-# Instantiate the service
-systemctl --user daemon-reload
-systemctl --user enable gnome-macos-remap
-systemctl --user start gnome-macos-remap
+# Instantiate the service (for local user)
+#systemctl --user daemon-reload
+#systemctl --user enable gnome-macos-remap
+
+# Install python scripts for Terminal
+# echo "INFO: Copying Python scripts..."
+# pip install pynput
+# cp $BASE_DIR/python/*.py ~/.local/bin
+# chmod +x ~/.local/bin/*.py
+
+# Install bash scripts for Terminal
+echo "INFO: Copying bash scripts..."
+cp $BASE_DIR/bin/terminal*.sh ~/.local/bin
+chmod +x ~/.local/bin/terminal*.sh
+
+echo "INFO: Creating autostart entry..."
+# Install application icon
+mkdir -p ~/.local/share/icons/hicolor/scalable/apps/
+cp $BASE_DIR/resources/gnome-macos-remap.svg ~/.local/share/icons/hicolor/scalable/apps/
+
+# Create autostart entry (systemd option not working not sure why)
+cp $BASE_DIR/resources/gnome-macos-remap.desktop ~/.config/autostart/
+chmod +x ~/.config/autostart/gnome-macos-remap.desktop
+
+# Create autostart script
+mkdir -p ~/.local/bin
+cp $BASE_DIR/resources/gnome-macos-remap.sh ~/.local/bin
+chmod +x ~/.local/bin/gnome-macos-remap.sh
 
 # Download and enable xremap GNOME extension (for Wayland only)
 if [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
-  echo "INFO: Action Required. Please install the xremap extension."
-  echo "      https://extensions.gnome.org/extension/5060/xremap/"
+  echo "INFO: Installing GNOME extension (for Wayland)."
+  # Prerequisites: gnomes-extensions
+  if ! command -v gnome-extensions &> /dev/null; then
+    echo "ERROR: Command \"gnome-extensions\" not found."
+    exit 0
+  fi  
+  gsettings set org.gnome.shell disable-user-extensions false
+  xdg-open 'https://extensions.gnome.org/extension/5060/xremap/'
+#  notify-send 'Action Required' 'Please install the xremap extension'
+#  echo "INFO: Action Required. Please install the xremap extension."
+#  echo "      https://extensions.gnome.org/extension/5060/xremap/"
 else
   gnome-extensions disable xremap@k0kubun.com
 fi
@@ -133,4 +172,4 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 # Restart is required in order for the changes in the `/usr/share/dbus-1/session.conf` to take place
 # Therefore cannot launch service right away
 
-echo "INFO: Done. Please restart your computer." 
+echo "INFO: Done. Please restart your computer."

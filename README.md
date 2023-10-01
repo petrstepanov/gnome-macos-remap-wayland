@@ -1,4 +1,4 @@
-# Gnome → macOS Keyboard Remap for Wayland (NOT WORKNIG, in progress...)
+# Gnome → macOS Keyboard Remap for Wayland
 
 This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality. Currently repository is in the early development. Only a few keybindings are implemented at the moment for testing purposes. For a complete and stable solution please refer to the original [Gnome → macOS Keyboard Remap](https://github.com/petrstepanov/gnome-macos-remap) that works with Xorg only.
 
@@ -11,12 +11,10 @@ Script builds latest version of the `xremap` for your architecture. Configuratio
 
 ## Prerequisities
 * Install Git and GNOME extensions `sudo <your-package-manager> install git gnome-shell-extensions`.
-* Install Rust `curl https://sh.rustup.rs -sSf | sh`. 
-* Restart GNOME Shell `killall -3 gnome-shell`.
 
 ## Installation
 1. Make sure you are running **Wayland** display server. Logout from your session. On the GNOME login screen click ⚙ icon on the bottom right. Select `GNOME` (defaults to Wayland). Log in.
-2. Check out thie repository run `install.sh` script in Terminal. Script will ask for administrator password.
+2. Check out this repository run `install.sh` script in Terminal. Script will ask for administrator password.
 
 ```
 cd ~/Downloads
@@ -26,7 +24,8 @@ chmod +x ./install.sh
 sh ./install.sh
 ```
 
-3. Restart your computer.
+3. Install and enable [this Gnome extension](https://extensions.gnome.org/extension/5060/xremap/).
+4. Restart your computer.
 
 ## How to uninstall
 
@@ -39,6 +38,8 @@ sh uninstall.sh
 2. Restart your computer.
 
 ## Logbook
+
+`Oct 01, 2023` • [Blocker issue](https://github.com/k0kubun/xremap/issues/100) is resolved. Repository is ready for testing.
 
 `May 23, 2021` • Moving to [xRemap](https://github.com/k0kubun/xremap) functionality instead.
 
