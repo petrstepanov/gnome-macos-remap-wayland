@@ -3,7 +3,7 @@
 This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality and works under Xord and Wayland.
 
 <figure>
-  <img src="https://raw.githubusercontent.com/petrstepanov/gnome-macos-remap-wayland/main/resources/gnome-macos-remap-wayland.png?raw=true" alt="Gnome macOS Remap Icon" />
+  <img src="https://raw.githubusercontent.com/petrstepanov/gnome-macos-remap-wayland/main/temp/resources/gnome-macos-remap-wayland.png?raw=true" alt="Gnome macOS Remap Icon" />
 </figure>
 
 ## How does it work?
