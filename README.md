@@ -1,13 +1,13 @@
 # Gnome → macOS Keyboard Remap for Wayland
 
-This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality. Currently repository is in the early development. Only a few keybindings are implemented at the moment for testing purposes. For a complete and stable solution please refer to the original [Gnome → macOS Keyboard Remap](https://github.com/petrstepanov/gnome-macos-remap) that works with Xorg only.
+This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality and works under Xord and Wayland.
 
 <figure>
   <img src="https://raw.githubusercontent.com/petrstepanov/gnome-macos-remap-wayland/main/resources/gnome-macos-remap-wayland.png?raw=true" alt="Gnome macOS Remap Icon" />
 </figure>
 
 ## How does it work?
-Script builds latest version of the `xremap` for your architecture. Configuration file `config.yaml` contains majority of the remapping instructions. On top of that the default GNOME shell keybindings are modified. A systemd service is created and enabled for a particular user. Therefore after the install other users on the system will not be affected by the remap. 
+Script doenloads the latest version of the `xremap` remapper for your architecture. Configuration file `config.yaml` contains majority of the remapping instructions. On top of that the default GNOME shell and Mutter keybindings are modified. A systemd service is created and enabled for a particular user. Therefore after the install other users on the system will not be affected by the remap. 
 
 ## Prerequisities
 * Install Git and GNOME extensions `sudo <your-package-manager> install git gnome-shell-extensions`.
