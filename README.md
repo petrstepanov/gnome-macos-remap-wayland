@@ -2,8 +2,8 @@
 
 This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality and works under Xord and Wayland.
 
-![Gnome macOS Remap Icon](./resources/gnome-macos-remap.png#gh-light-mode-only)
-![Gnome macOS Remap Icon](./resources/gnome-macos-remap-dark.png#gh-dark-mode-only)
+![Gnome macOS Remap Icon](./resources/gnome-macos-remap-wayland.png#gh-light-mode-only)
+![Gnome macOS Remap Icon](./resources/gnome-macos-remap-wayland-dark.png#gh-dark-mode-only)
 
 ## How does it work?
 Script doenloads the latest version of the `xremap` remapper for your architecture. Configuration file `config.yaml` contains majority of the remapping instructions. On top of that the default GNOME shell and Mutter keybindings are modified. A systemd service is created and enabled for a particular user. Therefore after the install other users on the system will not be affected by the remap. 
