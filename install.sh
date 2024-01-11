@@ -7,13 +7,25 @@ mkdir -p ~/Downloads && cd ~/Downloads
 # Remove previously downloaded archives (if any)
 rm -rf ./xremap-linux-x86_64-*
 
+# Detect architecture
+ARCH=`uname -m`
+
+echo $ARCH
+
+# Exit if unsupported architecture
+if [ "${ARCH}" != "x86_64" ] && [ "${ARCH}" != "aarch64" ]; then
+  echo "ERROR: Unsupported architecture. Please compile and install xRemap manually:"
+  echo "       https://github.com/k0kubun/xremap"
+  exit 1
+fi
+
 # Detect compositor type - X11 or Wayland
 if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
   echo "INFO: Detected X11."
-  ARCHIVE_NAME="xremap-linux-x86_64-x11.zip"
+  ARCHIVE_NAME="xremap-linux-${ARCH}-x11.zip"
 elif [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
   echo "INFO: Detected Wayland."
-  ARCHIVE_NAME="xremap-linux-x86_64-gnome.zip"
+  ARCHIVE_NAME="xremap-linux-${ARCH}-gnome.zip"
 else
   echo "ERROR: Unsupported compositor."
   exit 0
@@ -92,7 +104,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<
 gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Control>grave']"
 gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Control>grave']"
 
-# ⌘ - Space hotkey for spotlight functionality conflicts with default Gnome switch-input-source shortcut  
+# ⌘ - Space hotkey for spotlight functionality conflicts with default Gnome switch-input-source shortcut
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]"
 
@@ -107,7 +119,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Sup
 # Paste in terminal (if set via Ctrl+V, not Shift+Ctrl+V) interferes with default GNOME show notification panel shortcut
 gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
 
-# Toggle overview (with mac's F3 key) 
+# Toggle overview (with mac's F3 key)
 gsettings set org.gnome.shell.keybindings toggle-overview "['LaunchA']"
 
 # Show all applications (with mac's F4 key and imitate spotlight)
@@ -122,7 +134,7 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ close-window '<Shift><Super>q'
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Shift><Super>f'
 
-# Screenshots			
+# Screenshots
 gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
 gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"
@@ -133,4 +145,4 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 # Restart is required in order for the changes in the `/usr/share/dbus-1/session.conf` to take place
 # Therefore cannot launch service right away
 
-echo "INFO: Done. Please restart your computer." 
+echo "INFO: Done. Please restart your computer."
