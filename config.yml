@@ -33,7 +33,7 @@ keymap:
       Ctrl-K: Ctrl-D
 #  TODO: Next word
 #  TODO: Previous word
-  - name: Norg.gnome.Nautilus directory navigation and other
+  - name: org.gnome.Nautilus directory navigation and other
     application:
       only: org.gnome.Nautilus
     remap:
@@ -42,7 +42,7 @@ keymap:
       Ctrl-Backspace: Delete
       Shift-Ctrl-Dot: Ctrl-H
       Shift-Ctrl-G: Ctrl-L
-  - name: Tgnome-terminal-server copy and paste and window management
+  - name: gnome-terminal-server copy and paste and window management
     application:
       only: gnome-terminal-server
     remap:
@@ -53,12 +53,12 @@ keymap:
       Ctrl-W: Shift-Super-W
       Ctrl-Q: Shift-Super-Q
       Ctrl-F: Shift-Super-F
-  - name: Tgnome-terminal-server interrupt
+  - name: gnome-terminal-server interrupt
     application:
       only: gnome-terminal-server
     remap:
       Super-C: Ctrl-C
-  - name: Tgnome-terminal-server special combinations for nano editor (keycombiner.com/collections/nano/)
+  - name: gnome-terminal-server special combinations for nano editor (keycombiner.com/collections/nano/)
     application:
       only: gnome-terminal-server
     remap:
@@ -95,3 +95,9 @@ keymap:
       Super-B: Ctrl-B
       Super-N: Ctrl-N
       Super-KEY_SLASH: Ctrl-KEY_SLASH
+  - name: Eclipse context assist and switch header/source
+    application:
+      only: Eclipse
+    remap:
+      Super-KEY_SPACE: Alt-KEY_SPACE
+      Super-KEY_TAB: Alt-KEY_TAB
