@@ -4,7 +4,7 @@ Description=GNOME -> macOS Remap
 [Service]
 Type=simple
 Restart=on-failure
-RestartSec=30
+RestartSec=10
 ExecStart=xremap %h/.config/gnome-macos-remap/config.yml
 
 [Install]
