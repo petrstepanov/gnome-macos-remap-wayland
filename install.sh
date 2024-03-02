@@ -135,9 +135,12 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Shift><Super>f'
 
 # Screenshots
-gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
-gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
-gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"
+# gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
+# gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
+# gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"
+gsettings set org.gnome.shell.keybindings screenshot "['<Shift><Control>3']"
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>4']"
+gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>5']"
 
 # Disable screensaver to avoid potential issues
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
