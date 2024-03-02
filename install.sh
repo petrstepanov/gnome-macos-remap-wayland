@@ -88,6 +88,9 @@ fi
 # Tweak gsettings
 echo "INFO: Tweaking GNOME and Mutter keybindings..."
 
+# Ensure default system xkb-options are not turned on - may interfere
+gsettings reset org.gnome.desktop.input-sources xkb-options 
+
 # Disable overview key ⌘ - interferes with ⌘ + ... combinations
 gsettings set org.gnome.mutter overlay-key ''
 
