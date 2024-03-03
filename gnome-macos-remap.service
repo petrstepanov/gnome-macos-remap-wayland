@@ -1,11 +1,12 @@
 [Unit]
-Description=GNOME -> macOS Remap
+Description=GNOME → macOS Remap
+After=graphical-session.target
 
 [Service]
 Type=simple
 Restart=on-failure
 RestartSec=10
-ExecStart=xremap %h/.config/gnome-macos-remap/config.yml
+ExecStart=pkexec /usr/local/bin/xremap %h/.config/gnome-macos-remap/config.yml
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

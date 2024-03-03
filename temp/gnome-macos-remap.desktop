@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=GNOME → macOS Remap
-Comment=Brings macOS keybindings to the GNOME shell 
-Icon=gnome-macos-remap
-Exec=sh -c "sleep 5 && gnome-macos-remap.sh"
-# Exec=gnome-macos-remap.sh
-# Terminal=true

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+  <vendor>Petr Stepanov</vendor>
+  <vendor_url>https://github.com/petrstepanov/gnome-macos-remap-wayland</vendor_url>
+
+  <action id="com.petrstepanov.gnome-macos-remap-wayland">
+    <description>GNOME → macOS Remap (for Wayland and X11)</description>
+    <message>Authentication is required to start Xremap with administrative privileges</message>
+    <icon_name>gnome-macos-remap</icon_name>
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/xremap</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">%HOME%/.config/gnome-macos-remap/config.yml</annotate>
+  </action>
+
+</policyconfig>

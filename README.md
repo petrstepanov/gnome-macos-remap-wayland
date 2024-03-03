@@ -38,6 +38,8 @@ sh uninstall.sh
 
 ## Logbook
 
+`Mar 02, 2024` • Added PolKit policy to run Xremap with as admin (`pkexec`). Provides better support for different distros. 
+
 `Oct 01, 2023` • [Blocker issue](https://github.com/k0kubun/xremap/issues/100) is resolved. Repository is ready for testing.
 
 `May 23, 2021` • Moving to [xRemap](https://github.com/k0kubun/xremap) functionality instead.

@@ -10,21 +10,20 @@ rm -rf ./xremap-linux-x86_64-*
 # Detect architecture
 ARCH=`uname -m`
 
-echo $ARCH
-
 # Exit if unsupported architecture
 if [ "${ARCH}" != "x86_64" ] && [ "${ARCH}" != "aarch64" ]; then
-  echo "ERROR: Unsupported architecture. Please compile and install xRemap manually:"
+  echo "ERROR: Unsupported architecture. Please compile and install Xremap manually:"
   echo "       https://github.com/k0kubun/xremap"
   exit 1
 fi
+echo "INFO: Detected architecture: ${ARCH}"
 
 # Detect compositor type - X11 or Wayland
 if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
-  echo "INFO: Detected X11."
+  echo "INFO: Detected compositor: X11"
   ARCHIVE_NAME="xremap-linux-${ARCH}-x11.zip"
 elif [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
-  echo "INFO: Detected Wayland."
+  echo "INFO: Detected compositor: Wayland."
   ARCHIVE_NAME="xremap-linux-${ARCH}-gnome.zip"
 else
   echo "ERROR: Unsupported compositor."
@@ -32,7 +31,7 @@ else
 fi
 
 # Download corresponding archive
-echo "INFO: Downloading the \"$ARCHIVE_NAME\"..."
+echo "INFO: Downloading Xremap archive \"$ARCHIVE_NAME\"..."
 curl -s https://api.github.com/repos/k0kubun/xremap/releases/latest \
 | grep $ARCHIVE_NAME \
 | cut -d : -f 2,3 \
@@ -47,20 +46,36 @@ if ! command -v unzip &> /dev/null; then
 fi
 unzip -o ./xremap-linux-x86_64-*.zip
 
-echo "INFO: Installing the binary..."
+echo "INFO: Installing the Xremap binary..."
 # sudo systemctl stop gnome-macos-remap
 sudo cp ./xremap /usr/local/bin
 
-# Tweaking server access control for X11 https://github.com/k0kubun/xremap#x11
+# Tweaking server access control for X11: https://github.com/k0kubun/xremap#x11
 if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
   xhost +SI:localuser:root
 fi
 
+# Sudo requires a tweak in /usr/share/dbus-1/session.conf (according to the xremap readme)
+echo "INFO: Tweaking /usr/share/dbus-1/session.conf..."
+# If installed before - delete line containing "<!-- xremap -->"
+sudo sed -i "/xremap/d" /usr/share/dbus-1/session.conf
+# Add line: <allow user="root"> <!-- xremap -->
+sudo sed -i "s;<policy context=\"default\">;<policy context=\"default\">\n    <allow user=\"root\"/> <!-- xremap -->;g" /usr/share/dbus-1/session.conf
+
 # Copy xremap config file with macOS bindings
 CONFIG_DIR=~/.config/gnome-macos-remap/
-echo "INFO: Copying the xremap config file to ${CONFIG_DIR}"
+echo "INFO: Copying Xremap config file to ${CONFIG_DIR}..."
 mkdir -p $CONFIG_DIR
 cp $BASE_DIR/config.yml $CONFIG_DIR
+
+# Install PolKit policy to run Xremap with sudo
+echo "INFO: Installing the PolKit policy file"
+sudo cp $BASE_DIR/com.petrstepanov.gnome-macos-remap-wayland.policy /usr/share/polkit-1/actions
+sudo sed -i "s;%HOME%;$HOME;g" /usr/share/polkit-1/actions/com.petrstepanov.gnome-macos-remap-wayland.policy
+
+# Stop systemd service if running
+systemctl --user is-active  --quiet gnome-macos-remap.service && systemctl --user stop    gnome-macos-remap.service
+systemctl --user is-enabled --quiet gnome-macos-remap.service && systemctl --user disable gnome-macos-remap.service
 
 # Copy systemd service file
 SERVICE_DIR=~/.local/share/systemd/user/
@@ -68,34 +83,20 @@ echo "INFO: Installing systemd service to ${SERVICE_DIR}"
 mkdir -p $SERVICE_DIR
 cp $BASE_DIR/gnome-macos-remap.service $SERVICE_DIR
 
-# Run xremap without sudo
-sudo gpasswd -a ${USER} input
-echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/input.rules
-
-# Instantiate the service
+# Instantiate the systemd service
 systemctl --user daemon-reload
 systemctl --user enable gnome-macos-remap
-systemctl --user start gnome-macos-remap
-
-# Download and enable xremap GNOME extension (for Wayland only)
-if [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
-  echo "INFO: Action Required. Please install the xremap extension."
-  echo "      https://extensions.gnome.org/extension/5060/xremap/"
-else
-  gnome-extensions disable xremap@k0kubun.com
-fi
 
 # Tweak gsettings
 echo "INFO: Tweaking GNOME and Mutter keybindings..."
 
-# Ensure default system xkb-options are not turned on - may interfere
+# Ensure system xkb-options are turned off - may interfere
 gsettings reset org.gnome.desktop.input-sources xkb-options 
 
 # Disable overview key ⌘ - interferes with ⌘ + ... combinations
 gsettings set org.gnome.mutter overlay-key ''
 
 # Minimize one window and all windows - conflicts with show hidden files in Nautilus
-# gsettings set org.gnome.desktop.wm.keybindings minimize "['<Control>h']"
 gsettings set org.gnome.desktop.wm.keybindings minimize "[]"
 
 # Minimize all windows
@@ -138,9 +139,6 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ find '<Shift><Super>f'
 
 # Screenshots
-# gsettings set org.gnome.shell.keybindings screenshot "['<Primary><Shift>numbersign']"
-# gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>dollar']"
-# gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>percent']"
 gsettings set org.gnome.shell.keybindings screenshot "['<Shift><Control>3']"
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Control>4']"
 gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Control>5']"
@@ -151,4 +149,15 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 # Restart is required in order for the changes in the `/usr/share/dbus-1/session.conf` to take place
 # Therefore cannot launch service right away
 
-echo "INFO: Done. Please restart your computer."
+echo "INFO: Installation successfully completed."
+
+# Remind user to install Xremap GNOME extension (for Wayland only)
+echo ""
+if [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
+  echo "Important! Please install the Xremap extension and restart your computer."
+  echo "https://extensions.gnome.org/extension/5060/xremap/"
+else
+  gnome-extensions disable xremap@k0kubun.com
+  echo "Important! Please restart your computer."
+fi
+echo ""
