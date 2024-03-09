@@ -20,7 +20,7 @@ cd ~/Downloads
 git clone https://github.com/petrstepanov/gnome-macos-remap-wayland
 cd gnome-macos-remap-wayland
 chmod +x ./install.sh
-sh ./install.sh
+./install.sh
 ```
 
 3. Install and enable [this Gnome extension](https://extensions.gnome.org/extension/5060/xremap/).
@@ -31,7 +31,7 @@ sh ./install.sh
 1. If repository was removed, check it out again. Navigate into the program directory in Terminal and run:
 ```
 chmod +x ./uninstall.sh
-sh uninstall.sh
+./uninstall.sh
 ```
 
 2. Restart your computer.
