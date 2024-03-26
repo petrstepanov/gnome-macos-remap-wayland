@@ -5,7 +5,7 @@ BASE_DIR=`pwd`
 mkdir -p ~/Downloads && cd ~/Downloads
 
 # Remove previously downloaded archives (if any)
-rm -rf ./xremap-linux-x86_64-*
+rm -rf ./xremap-linux-${ARCH}-*
 
 # Detect architecture
 ARCH=`uname -m`
@@ -45,7 +45,7 @@ if ! command -v unzip &> /dev/null; then
   echo "ERROR: Command \"unzip\" not found."
   exit 0
 fi
-unzip -o ./xremap-linux-x86_64-*.zip
+unzip -o ./xremap-linux-${ARCH}-*.zip
 
 echo "INFO: Installing the binary..."
 # sudo systemctl stop gnome-macos-remap
