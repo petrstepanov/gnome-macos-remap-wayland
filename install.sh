@@ -33,7 +33,7 @@ fi
 
 # Download corresponding archive
 echo "INFO: Downloading the \"$ARCHIVE_NAME\"..."
-curl -s https://api.github.com/repos/k0kubun/xremap/releases/latest \
+curl -sL https://api.github.com/repos/k0kubun/xremap/releases/latest \
 | grep $ARCHIVE_NAME \
 | cut -d : -f 2,3 \
 | tr -d \" \
