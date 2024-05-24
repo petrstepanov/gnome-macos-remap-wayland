@@ -1,4 +1,4 @@
-# Gnome → macOS Keyboard Remap for Wayland
+# GNOME → macOS Keyboard Remap for Wayland
 
 This keyboard remap is based on the [xRemap](https://github.com/k0kubun/xremap) functionality and works under Xord and Wayland.
 
