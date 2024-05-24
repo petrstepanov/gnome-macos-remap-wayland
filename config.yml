@@ -4,8 +4,8 @@ keypress_delay_ms: 10
 # For key-to-key remapping (no combinations). Remapping a key to a modifier key (e.g. CapsLock to Control_L) is supported only in `modmap` section
 modmap:
   - name: Make ⌘ act as Ctrl
-    application:
-      not: org.gnome.Console
+#    application:
+#      not: [gnome-terminal-server, org.gnome.Console]
     remap:
       LeftCtrl: LeftMeta
       LeftMeta: LeftCtrl
@@ -101,11 +101,14 @@ keymap:
     remap:
       Super-KEY_SPACE: Alt-KEY_SPACE
       Super-KEY_TAB: Alt-KEY_TAB
-  - name: Console copy and paste
+  - name: Console shortcuts
     application:
       only: org.gnome.Console
     remap:
-      Super-C: Ctrl-Shift-C
-      Super-V: Ctrl-Shift-V
-      Super-N: Ctrl-Shift-N
-      Super-T: Ctrl-Shift-T
+      Ctrl-C: Ctrl-Shift-C # Copy text
+      Ctrl-V: Ctrl-Shift-V # Paste text
+      Ctrl-N: Ctrl-Shift-N # New window
+      Ctrl-Q: Ctrl-Shift-Q # Close window
+      Ctrl-T: Ctrl-Shift-T # New tab
+      Ctrl-W: Ctrl-Shift-W # Close tab
+      Ctrl-F: Shift-Ctrl-F # Find
