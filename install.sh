@@ -13,12 +13,12 @@ echo "INFO: Detected ${ARCH} PC architecture."
 
 # Exit if unsupported architecture
 if [ "${ARCH}" != "x86_64" ] && [ "${ARCH}" != "aarch64" ]; then
-  echo "ERROR: Unsupported architecture. Please compile and install xRemap manually:"
+  echo "ERROR: Unsupported architecture. Please compile and install Xremap manually:"
   echo "       https://github.com/k0kubun/xremap"
   exit 1
 fi
 
-# Detect compositor type - X11 or Wayland
+# Detect compositor type (X11 or Wayland)
 if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
   echo "INFO: Detected X11 compositor."
   ARCHIVE_NAME="xremap-linux-${ARCH}-x11.zip"
@@ -30,10 +30,10 @@ else
   exit 1
 fi
 
-# Download latest release from GitHub - latest 0.10.0 throws `application-client: GNOME (supported: false)`
+# Download latest release from GitHub
 wget https://github.com/xremap/xremap/releases/latest/download/$ARCHIVE_NAME
 
-# Extract the archive and install binary to ~/.local/bin
+# Extract the archive
 echo "INFO: Extracting the archive..."
 if ! command -v unzip &> /dev/null; then
   echo "ERROR: Command \"unzip\" not found."
@@ -51,12 +51,13 @@ fi
 echo "INFO: Installing the binary..."
 sudo cp ./xremap /usr/local/bin
 
-# Tweaking server access control for X11 https://github.com/k0kubun/xremap#x11
+# Tweaking server access control for X11
+# https://github.com/k0kubun/xremap#x11
 if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
   xhost +SI:localuser:root
 fi
 
-# Copy xremap config file with macOS bindings
+# Copy Xremap config file with macOS bindings
 CONFIG_DIR=~/.config/gnome-macos-remap/
 echo "INFO: Copying the xremap config file..."
 mkdir -p $CONFIG_DIR
@@ -74,7 +75,8 @@ echo "INFO: Copying bash scripts..."
 mkdir -p $BIN_DIR
 cp $BASE_DIR/bin/*.sh $BIN_DIR
 
-# Run xremap without sudo
+# Run Xremap without sudo
+# https://github.com/xremap/xremap?tab=readme-ov-file#running-xremap-without-sudo
 sudo gpasswd -a ${USER} input
 echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/input.rules
 
@@ -153,7 +155,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 # Therefore cannot launch service right away
 
 
-# Download and enable xremap GNOME extension (for Wayland only)
+# Download and enable Xremap GNOME extension (for Wayland only)
 if [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
   RED=`tput setaf 1`
   RESET=`tput sgr0`
