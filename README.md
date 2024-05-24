@@ -23,7 +23,7 @@ chmod +x ./install.sh
 ./install.sh
 ```
 
-3. Install and enable [this Gnome extension](https://extensions.gnome.org/extension/5060/xremap/).
+3. Install and enable [this GNOME extension](https://extensions.gnome.org/extension/5060/xremap/).
 4. Restart your computer.
 
 ## How to uninstall
