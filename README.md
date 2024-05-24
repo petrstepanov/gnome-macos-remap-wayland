@@ -38,6 +38,8 @@ chmod +x ./uninstall.sh
 
 ## Logbook
 
+`May 24, 2024` • Added keybindings for [GNOME Console](https://apps.gnome.org/Console/) app.
+
 `Oct 01, 2023` • [Blocker issue](https://github.com/k0kubun/xremap/issues/100) is resolved. Repository is ready for testing.
 
 `May 23, 2021` • Moving to [xRemap](https://github.com/k0kubun/xremap) functionality instead.

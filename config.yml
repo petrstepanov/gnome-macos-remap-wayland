@@ -4,8 +4,8 @@ keypress_delay_ms: 10
 # For key-to-key remapping (no combinations). Remapping a key to a modifier key (e.g. CapsLock to Control_L) is supported only in `modmap` section
 modmap:
   - name: Make ⌘ act as Ctrl
-#    application:
-#      not: gnome-terminal-server
+    application:
+      not: org.gnome.Console
     remap:
       LeftCtrl: LeftMeta
       LeftMeta: LeftCtrl
@@ -33,16 +33,16 @@ keymap:
       Ctrl-K: Ctrl-D
 #  TODO: Next word
 #  TODO: Previous word
-  - name: org.gnome.Nautilus directory navigation and other
+  - name: Nautilus directory navigation and other
     application:
       only: org.gnome.Nautilus
     remap:
       Ctrl-Up: Alt-Up
-      Ctrl-Down: Alt-Down
+      Ctrl-Down: Enter
       Ctrl-Backspace: Delete
       Shift-Ctrl-Dot: Ctrl-H
       Shift-Ctrl-G: Ctrl-L
-  - name: gnome-terminal-server copy and paste and window management
+  - name: Terminal copy and paste and window management
     application:
       only: gnome-terminal-server
     remap:
@@ -53,12 +53,12 @@ keymap:
       Ctrl-W: Shift-Super-W
       Ctrl-Q: Shift-Super-Q
       Ctrl-F: Shift-Super-F
-  - name: gnome-terminal-server interrupt
+  - name: Terminal interrupt
     application:
       only: gnome-terminal-server
     remap:
       Super-C: Ctrl-C
-  - name: gnome-terminal-server special combinations for nano editor (keycombiner.com/collections/nano/)
+  - name: Terminal special combinations for nano editor (keycombiner.com/collections/nano/)
     application:
       only: gnome-terminal-server
     remap:
@@ -80,7 +80,7 @@ keymap:
 # - or -
 # B. Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back.
       Super-D:
-        launch: ["sh", "/home/petrstepanov/.local/bin/tgnome-terminal-server-ctrl-d.sh"]
+        launch: ["sh", "~/.local/bin/tgnome-terminal-server-ctrl-d.sh"]
       Super-F: Ctrl-F
       Super-G: Ctrl-G
       Super-H: Ctrl-H
@@ -101,3 +101,11 @@ keymap:
     remap:
       Super-KEY_SPACE: Alt-KEY_SPACE
       Super-KEY_TAB: Alt-KEY_TAB
+  - name: Console copy and paste
+    application:
+      only: org.gnome.Console
+    remap:
+      Super-C: Ctrl-Shift-C
+      Super-V: Ctrl-Shift-V
+      Super-N: Ctrl-Shift-N
+      Super-T: Ctrl-Shift-T
