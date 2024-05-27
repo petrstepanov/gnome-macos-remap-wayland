@@ -53,17 +53,16 @@ keymap:
       Ctrl-W: Shift-Super-W
       Ctrl-Q: Shift-Super-Q
       Ctrl-F: Shift-Super-F
-  - name: Terminal interrupt
+  - name: Terminal and Console interrupt
     application:
-      only: gnome-terminal-server
+      only: [gnome-terminal-server, org.gnome.Console]
     remap:
       Super-C: Ctrl-C
-  - name: Terminal special combinations for nano editor (keycombiner.com/collections/nano/)
+  - name: Terminal and Console - make Ctrl work in `nano` editor # keycombiner.com/collections/nano/
     application:
-      only: gnome-terminal-server
+      only: [gnome-terminal-server, org.gnome.Console]
     remap:
-#      Interferes with GNOME close window - not sure how to work around
-      Super-Q: Ctrl-Q
+      Super-Q: Ctrl-Q # Interferes with GNOME close window - not sure how to work around
       Super-W: Ctrl-W
       Super-E: Ctrl-E
       Super-E: Ctrl-R
@@ -75,12 +74,10 @@ keymap:
       Super-KEY_RIGHTBRACE: Ctrl-KEY_RIGHTBRACE
       Super-A: Ctrl-A
       Super-S: Ctrl-S
-# How to implement a tgnome-terminal-server key combination that conflicts with some GNOME keybinding?
-# A. Unset the default via gsettings in install.sh and do not use this GNOME keybinding
-# - or -
-# B. Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back.
+# How to implement a gnome-terminal-server key combination that conflicts with some GNOME keybinding?
+# Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back.
       Super-D:
-        launch: ["sh", "~/.local/bin/tgnome-terminal-server-ctrl-d.sh"]
+        launch: ["sh", "~/.local/bin/terminal-console-ctrl-d.sh"]
       Super-F: Ctrl-F
       Super-G: Ctrl-G
       Super-H: Ctrl-H
@@ -95,12 +92,6 @@ keymap:
       Super-B: Ctrl-B
       Super-N: Ctrl-N
       Super-KEY_SLASH: Ctrl-KEY_SLASH
-  - name: Eclipse context assist and switch header/source
-    application:
-      only: Eclipse
-    remap:
-      Super-KEY_SPACE: Alt-KEY_SPACE
-      Super-KEY_TAB: Alt-KEY_TAB
   - name: Console shortcuts
     application:
       only: org.gnome.Console
@@ -112,3 +103,9 @@ keymap:
       Ctrl-T: Ctrl-Shift-T # New tab
       Ctrl-W: Ctrl-Shift-W # Close tab
       Ctrl-F: Shift-Ctrl-F # Find
+  - name: Eclipse context assist and switch header/source
+    application:
+      only: Eclipse
+    remap:
+      Super-KEY_SPACE: Alt-KEY_SPACE
+      Super-KEY_TAB: Alt-KEY_TAB
