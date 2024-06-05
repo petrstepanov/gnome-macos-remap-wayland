@@ -33,15 +33,16 @@ keymap:
       Ctrl-K: Ctrl-D
 #  TODO: Next word
 #  TODO: Previous word
-  - name: Nautilus directory navigation and other
+  - name: Nautilus (Files) shortcuts
     application:
       only: org.gnome.Nautilus
     remap:
-      Ctrl-Up: Alt-Up
-      Ctrl-Down: Enter
-      Ctrl-Backspace: Delete
-      Shift-Ctrl-Dot: Ctrl-H
-      Shift-Ctrl-G: Ctrl-L
+      Ctrl-Up: Alt-Up          # Go Up
+      Ctrl-Down: Enter         # Go Down. Using `Enter` here because `Alt-Down` does not open files, only goes down.
+      Ctrl-Backspace: Delete   # Move to Trash
+      Shift-Ctrl-Dot: Ctrl-H   # Show/Hide Hidden Files
+      Shift-Ctrl-G: Ctrl-L     # Enter Location
+      Enter: F2                # Rename
   - name: Terminal copy and paste and window management
     application:
       only: gnome-terminal-server
