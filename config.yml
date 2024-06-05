@@ -42,7 +42,7 @@ keymap:
       Ctrl-Backspace: Delete   # Move to Trash
       Shift-Ctrl-Dot: Ctrl-H   # Show/Hide Hidden Files
       Shift-Ctrl-G: Ctrl-L     # Enter Location
-      Enter: F2                # Rename
+      # Enter: F2              # Rename. Conflict when need to hit `Enter` in focused address bar.
   - name: Terminal copy and paste and window management
     application:
       only: gnome-terminal-server
