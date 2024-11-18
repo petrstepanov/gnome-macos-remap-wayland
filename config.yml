@@ -5,7 +5,7 @@ keypress_delay_ms: 10
 modmap:
   - name: Make ⌘ act as Ctrl
 #    application:
-#      not: [gnome-terminal-server, org.gnome.Console]
+#      not: [org.gnome.Terminal, org.gnome.Console]
     remap:
       LeftCtrl: LeftMeta
       LeftMeta: LeftCtrl
@@ -28,7 +28,7 @@ keymap:
       Alt-Backspace: Ctrl-Backspace
   - name: Delete complete line # TODO - check on macOS. Not sure how to delete before and after cursor.
     application:
-      not: gnome-terminal-server
+      not: org.gnome.Terminal
     remap:
       Ctrl-K: Ctrl-D
 #  TODO: Next word
@@ -44,7 +44,7 @@ keymap:
       Shift-Ctrl-G: Ctrl-L
   - name: Terminal copy and paste and window management
     application:
-      only: gnome-terminal-server
+      only: org.gnome.Terminal
     remap:
       Ctrl-C: Shift-Super-C
       Ctrl-V: Shift-Super-V
@@ -55,12 +55,12 @@ keymap:
       Ctrl-F: Shift-Super-F
   - name: Terminal and Console interrupt
     application:
-      only: [gnome-terminal-server, org.gnome.Console]
+      only: [org.gnome.Terminal, org.gnome.Console, org.gnome.Ptyxis]
     remap:
       Super-C: Ctrl-C
   - name: Terminal and Console - make Ctrl work in `nano` editor # keycombiner.com/collections/nano/
     application:
-      only: [gnome-terminal-server, org.gnome.Console]
+      only: [org.gnome.Terminal, org.gnome.Console, org.gnome.Ptyxis]
     remap:
       Super-Q: Ctrl-Q # Interferes with GNOME close window - not sure how to work around
       Super-W: Ctrl-W
@@ -74,7 +74,7 @@ keymap:
       Super-KEY_RIGHTBRACE: Ctrl-KEY_RIGHTBRACE
       Super-A: Ctrl-A
       Super-S: Ctrl-S
-# How to implement a gnome-terminal-server key combination that conflicts with some GNOME keybinding?
+# How to implement a org.gnome.Terminal key combination that conflicts with some GNOME keybinding?
 # Make a script similar to the one below. Script unsets the GNOME keybinding, then sends keys, then restores keybinding back.
       Super-D:
         launch: ["sh", "~/.local/bin/terminal-console-ctrl-d.sh"]
@@ -92,9 +92,9 @@ keymap:
       Super-B: Ctrl-B
       Super-N: Ctrl-N
       Super-KEY_SLASH: Ctrl-KEY_SLASH
-  - name: Console shortcuts
+  - name: Console and Ptyxis shortcuts
     application:
-      only: org.gnome.Console
+      only: [org.gnome.Console, org.gnome.Ptyxis]
     remap:
       Ctrl-C: Ctrl-Shift-C # Copy text
       Ctrl-V: Ctrl-Shift-V # Paste text
