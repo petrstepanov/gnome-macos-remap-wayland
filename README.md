@@ -6,7 +6,7 @@ This keyboard remap is based on the [Xremap](https://github.com/k0kubun/xremap) 
 ![Gnome macOS Remap Icon](./resources/gnome-macos-remap-wayland-dark.png#gh-dark-mode-only)
 
 ## How does it work?
-Script doenloads the latest version of the `xremap` remapper for your architecture. Configuration file `config.yml` contains majority of the remapping instructions. On top of that the default GNOME shell and Mutter keybindings are modified. A systemd service is created and enabled for a particular user. Therefore after the install other users on the system will not be affected by the remap. 
+Script downloads the latest version of the `xremap` remapper for your architecture. Configuration file `config.yml` contains majority of the remapping instructions. On top of that the default GNOME shell and Mutter keybindings are modified. A systemd service is created and enabled for a particular user. Therefore after the install other users on the system will not be affected by the remap. 
 
 ## Prerequisities
 * Install Git and GNOME extensions `sudo <your-package-manager> install git gnome-shell-extensions`.
