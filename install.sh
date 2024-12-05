@@ -31,7 +31,7 @@ else
 fi
 
 if which xremap > /dev/null 2>&1; then
-  echo "INFO: xremap is already installed. Skipping...
+  echo "INFO: xremap is already installed. Skipping...."
 else
   # Download latest release from GitHub
   wget https://github.com/xremap/xremap/releases/latest/download/$ARCHIVE_NAME
