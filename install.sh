@@ -30,26 +30,30 @@ else
   exit 1
 fi
 
-# Download latest release from GitHub
-wget https://github.com/xremap/xremap/releases/latest/download/$ARCHIVE_NAME
+if which xremap > /dev/null 2>&1; then
+  echo "INFO: xremap is already installed. Skipping...."
+else
+  # Download latest release from GitHub
+  wget https://github.com/xremap/xremap/releases/latest/download/$ARCHIVE_NAME
 
-# Extract the archive
-echo "INFO: Extracting the archive..."
-if ! command -v unzip &> /dev/null; then
-  echo "ERROR: Command \"unzip\" not found."
-  exit 0
+  # Extract the archive
+  echo "INFO: Extracting the archive..."
+  if ! command -v unzip &> /dev/null; then
+    echo "ERROR: Command \"unzip\" not found."
+    exit 0
+  fi
+  unzip -o ./xremap-linux-${ARCH}-*.zip
+
+  # Remove old binary (if any)
+  if command -v gnome-terminal &> /dev/null ; then
+      echo "INFO: Removing old binary..."
+      sudo rm -rf /usr/local/bin/xremap
+  fi
+
+  # Install new binary (if any)
+  echo "INFO: Installing the binary..."
+  sudo cp ./xremap /usr/local/bin
 fi
-unzip -o ./xremap-linux-${ARCH}-*.zip
-
-# Remove old binary (if any)
-if command -v gnome-terminal &> /dev/null ; then
-    echo "INFO: Removing old binary..."
-    sudo rm -rf /usr/local/bin/xremap
-fi
-
-# Install new binary (if any)
-echo "INFO: Installing the binary..."
-sudo cp ./xremap /usr/local/bin
 
 # Tweaking server access control for X11
 # https://github.com/k0kubun/xremap#x11
@@ -156,11 +160,17 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 
 
 # Download and enable Xremap GNOME extension (for Wayland only)
+systemctl --user status gnome-macos-remap
 if [ "${XDG_SESSION_TYPE}" == "wayland" ]; then
-  RED=`tput setaf 1`
-  RESET=`tput sgr0`
-  echo "INFO: ${RED}Action Required${RESET}. Install the xremap extension and restart your PC."
-  echo "      https://extensions.gnome.org/extension/5060/xremap/"
+  # Check if xremap extension is enabled
+  if gnome-extensions list | grep -q "xremap@k0kubun.com"; then
+    echo "INFO: The xremap extension is already enabled."
+  else
+    RED=`tput setaf 1`
+    RESET=`tput sgr0`
+    echo "INFO: ${RED}Action Required${RESET}. Install the xremap extension and restart your PC."
+    echo "      https://extensions.gnome.org/extension/5060/xremap/"
+  fi
 else
   gnome-extensions disable xremap@k0kubun.com
   echo "INFO: Please restart your computer."
