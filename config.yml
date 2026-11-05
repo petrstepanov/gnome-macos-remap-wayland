@@ -31,8 +31,12 @@ keymap:
       not: org.gnome.Terminal
     remap:
       Ctrl-K: Ctrl-D
-#  TODO: Next word
-#  TODO: Previous word
+  - name: Move cursor by word (with Shift for selection)
+    remap:
+      Alt-Left: Ctrl-Left
+      Alt-Right: Ctrl-Right
+      Shift-Alt-Left: Shift-Ctrl-Left
+      Shift-Alt-Right: Shift-Ctrl-Right
   - name: Nautilus (Files) shortcuts
     application:
       only: org.gnome.Nautilus
